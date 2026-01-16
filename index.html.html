@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sorpresa para Ludmi 💜</title>
+  <style>
+    :root{
+      --g1:#ff9a9e;
+      --g2:#fad0c4;
+      --g3:#a18cd1;
+      --bg:#0f1220;
+      --card:#151933;
+      --text:#ffffff;
+      --muted:#e6dfff;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial;
+      color:var(--text);
+      background: linear-gradient(120deg, var(--g1), var(--g2), var(--g3));
+      background-size: 300% 300%;
+      animation: gradientMove 18s ease infinite;
+      overflow:hidden;
+    }
+    @keyframes gradientMove{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    .container{
+      min-height:100%;
+      display:grid;
+      place-items:center;
+      padding:20px;
+    }
+    .card{
+      width:min(680px, 94vw);
+      background: rgba(15,18,32,.75);
+      border-radius:24px;
+      padding:26px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+      backdrop-filter: blur(10px);
+      animation: enter 1s ease forwards;
+    }
+    @keyframes enter{from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:none}}
+
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(26px, 5vw, 38px);
+      text-align:center;
+    }
+    p{
+      color:var(--muted);
+      font-size: clamp(15px, 3.8vw, 17px);
+      text-align:center;
+    }
+
+    .actions{
+      display:flex;
+      gap:14px;
+      justify-content:center;
+      margin-top:20px;
+      flex-wrap:wrap;
+    }
+    button{
+      border:none;
+      padding:14px 20px;
+      border-radius:16px;
+      font-weight:700;
+      cursor:pointer;
+      color:#0b0e1a;
+      background: linear-gradient(135deg, #ffffff, #ffe9f0);
+      box-shadow: 0 12px 26px rgba(0,0,0,.35);
+      transition: transform .15s ease, filter .15s ease;
+    }
+    button.primary{
+      color:white;
+      background: linear-gradient(135deg, #ff6a88, #ff99ac);
+    }
+    button:hover{transform: translateY(-2px); filter:brightness(1.05)}
+
+    .reveal{
+      margin-top:18px;
+      padding:18px;
+      border-radius:16px;
+      background: rgba(255,255,255,.08);
+      animation: pop .4s ease both;
+    }
+    @keyframes pop{from{opacity:0; transform:scale(.96)} to{opacity:1; transform:none}}
+
+    footer{
+      position:fixed;
+      bottom:12px;
+      width:100%;
+      text-align:center;
+      font-size:12px;
+      color:#ffffffcc;
+      padding:0 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Música de fondo suave -->
+  <audio autoplay loop volume="0.4">
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_9f0c7b5f3c.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="container">
+    <div class="card">
+      <h1>Sorpresa para Ludmi 💜</h1>
+      <p>Una pequeña página hecha con amor, solo para vos.</p>
+
+      <div class="actions">
+        <button class="primary" id="btnReveal">Ver mensaje</button>
+        <button id="btnFlowers">Lluvia de flores</button>
+      </div>
+
+      <div id="secret" class="reveal" style="display:none">
+        <p><strong>Pequeña sorpresa para mi amor lindo.</strong><br>
+        Te amo mucho Ludmi 💜<br><br>
+        Una pequeña página del rincón de internet para que perdure por siempre nuestro amor.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Pequeña sorpresa para mi amor lindo, te amo mucho Ludmi. Una pequeña página del rincón de internet para que perdure por siempre nuestro amor.
+  </footer>
+
+  <script>
+    const btnReveal = document.getElementById('btnReveal');
+    const btnFlowers = document.getElementById('btnFlowers');
+    const secret = document.getElementById('secret');
+
+    btnReveal.addEventListener('click', () => {
+      secret.style.display = secret.style.display === 'none' ? 'block' : 'none';
+    });
+btnFlowers.addEventListener('click', () => {
+  for(let i=0;i<45;i++){
+    const flower = document.createElement('span');
+    flower.textContent = ['🌸','🌷','🌹','💐','🌺'][Math.floor(Math.random()*5)];
+    flower.style.position = 'fixed';
+    flower.style.left = Math.random()*100 + 'vw';
+    flower.style.top = Math.random()*100 + 'vh';
+    flower.style.fontSize = (18 + Math.random()*22) + 'px';
+    flower.style.opacity = '0';
+    flower.style.transition = 'transform 3.5s ease-in-out, opacity 3.5s ease-in-out, filter 3.5s ease-in-out';
+    document.body.appendChild(flower);
+
+    const x = (Math.random() - 0.5) * 300;
+    const y = (Math.random() - 0.5) * 300;
+    const r = (Math.random() - 0.5) * 180;
+
+requestAnimationFrame(() => {
+  flower.style.opacity = '1';
+  flower.style.filter = 'blur(0px)';
+  flower.style.transform = `translate(${x}px, ${y}px) rotate(${r}deg)`;
+});
+
+
+  setTimeout(() => {
+  flower.style.opacity = '0';
+  flower.style.filter = 'blur(6px)';
+}, 2100);
+
+
+    setTimeout(() => flower.remove(), 3600);
+  }
+});
+
+
+  </script>
+</body>
+</html>
