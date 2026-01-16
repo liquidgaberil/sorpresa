@@ -140,24 +140,40 @@
     btnReveal.addEventListener('click', () => {
       secret.style.display = secret.style.display === 'none' ? 'block' : 'none';
     });
+btnFlowers.addEventListener('click', () => {
+  for(let i=0;i<45;i++){
+    const flower = document.createElement('span');
+    flower.textContent = ['🌸','🌷','🌹','💐','🌺'][Math.floor(Math.random()*5)];
+    flower.style.position = 'fixed';
+    flower.style.left = Math.random()*100 + 'vw';
+    flower.style.top = Math.random()*100 + 'vh';
+    flower.style.fontSize = (18 + Math.random()*22) + 'px';
+    flower.style.opacity = '0';
+    flower.style.transition = 'transform 3.5s ease-in-out, opacity 3.5s ease-in-out, filter 3.5s ease-in-out';
+    document.body.appendChild(flower);
 
-    btnFlowers.addEventListener('click', () => {
-      for(let i=0;i<40;i++){
-        const flower = document.createElement('span');
-        flower.textContent = ['🌸','🌷','🌹','💐','🌺'][Math.floor(Math.random()*5)];
-        flower.style.position = 'fixed';
-        flower.style.left = Math.random()*100 + 'vw';
-        flower.style.top = '-20px';
-        flower.style.fontSize = (20 + Math.random()*20) + 'px';
-        flower.style.transition = 'transform 2.5s linear, opacity 2.5s';
-        document.body.appendChild(flower);
-        requestAnimationFrame(()=>{
-          flower.style.transform = `translateY(${120}vh) rotate(${Math.random()*360}deg)`;
-          flower.style.opacity = 0;
-        });
-        setTimeout(()=>flower.remove(),2500);
-      }
-    });
+    const x = (Math.random() - 0.5) * 300;
+    const y = (Math.random() - 0.5) * 300;
+    const r = (Math.random() - 0.5) * 180;
+
+requestAnimationFrame(() => {
+  flower.style.opacity = '1';
+  flower.style.filter = 'blur(0px)';
+  flower.style.transform = `translate(${x}px, ${y}px) rotate(${r}deg)`;
+});
+
+
+  setTimeout(() => {
+  flower.style.opacity = '0';
+  flower.style.filter = 'blur(6px)';
+}, 2100);
+
+
+    setTimeout(() => flower.remove(), 3600);
+  }
+});
+
+
   </script>
 </body>
 </html>
